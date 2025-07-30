@@ -1,0 +1,12 @@
+#include <stdio.h>
+
+int main() {
+    int i = 1; // Initialize counter
+    
+    while (i <= 5) { // Loop condition
+        printf("%d\n", i); // Print current number
+        i++; // Increment counter
+    }
+    
+    return 0;
+}
