@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main() {
+    char brand[30], model[30], color[20];
+    int serialNumber, battery;
+    float price;
+
+    printf("Enter Brand Name: ");
+    scanf("%s", brand);
+    printf("Enter Model Name: ");
+    scanf("%s", model);
+    printf("Enter Serial Number: ");
+    scanf("%d", &serialNumber);
+    printf("Enter Price: ");
+    scanf("%f", &price);
+    printf("Enter Color: ");
+    scanf("%s", color);
+    printf("Enter Battery Capacity (mAh): ");
+    scanf("%d", &battery);
+
+    printf("\n--- Mobile Information ---\n");
+    printf("Brand: %s\n", brand);
+    printf("Model: %s\n", model);
+    printf("Serial Number: %d\n", serialNumber);
+    printf("Price: %.2f\n", price);
+    printf("Color: %s\n", color);
+    printf("Battery: %d mAh\n", battery);
+
+    return 0;
+}
