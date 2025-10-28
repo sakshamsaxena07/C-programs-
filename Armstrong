@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int num, sum = 0, temp, digits = 0, lastDigit;
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    temp = num;
+    while (temp != 0) {
+        digits++;
+        temp /= 10;
+    }
+
+    temp = num;
+    while (temp != 0) {
+        lastDigit = temp % 10;
+        sum += pow(lastDigit, digits);
+        temp /= 10;
+    }
+
+    if (num == sum)
+        printf("Armstrong number.\n");
+    else
+        printf("Not an Armstrong number.\n");
+
+    return 0;
+}
