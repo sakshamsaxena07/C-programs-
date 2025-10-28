@@ -1,0 +1,14 @@
+#include <stdio.h>
+
+void testLocal() {
+    int localVar = 20;  // Local variable
+    printf("Inside testLocal() function, localVar = %d\n", localVar);
+}
+
+int main() {
+    testLocal();
+    // The following line will cause an error if uncommented:
+    // printf("%d", localVar);  // ❌ localVar not accessible here
+    printf("localVar cannot be accessed outside its function.\n");
+    return 0;
+}
