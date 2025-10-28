@@ -1,0 +1,53 @@
+#include <stdio.h>
+
+int main() {
+    int a = 10, b = 5, choice, subChoice;
+
+    printf("1. Arithmetic\n2. Relational\n3. Logical\n4. Bitwise\n5. Increment/Decrement\n");
+    printf("Enter main choice: ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            printf("1.Add 2.Subtract 3.Multiply 4.Divide\n");
+            scanf("%d", &subChoice);
+            switch (subChoice) {
+                case 1: printf("Sum = %d\n", a + b); break;
+                case 2: printf("Difference = %d\n", a - b); break;
+                case 3: printf("Product = %d\n", a * b); break;
+                case 4: printf("Quotient = %d\n", a / b); break;
+                default: printf("Invalid\n");
+            }
+            break;
+
+        case 2:
+            printf("(a > b): %d\n", a > b);
+            printf("(a < b): %d\n", a < b);
+            printf("(a == b): %d\n", a == b);
+            break;
+
+        case 3:
+            printf("(a && b): %d\n", (a && b));
+            printf("(a || b): %d\n", (a || b));
+            printf("(!a): %d\n", (!a));
+            break;
+
+        case 4:
+            printf("(a & b): %d\n", a & b);
+            printf("(a | b): %d\n", a | b);
+            printf("(a ^ b): %d\n", a ^ b);
+            break;
+
+        case 5:
+            printf("Pre-increment: %d\n", ++a);
+            printf("Post-increment: %d\n", a++);
+            printf("Pre-decrement: %d\n", --b);
+            printf("Post-decrement: %d\n", b--);
+            break;
+
+        default:
+            printf("Invalid choice.\n");
+    }
+
+    return 0;
+}
