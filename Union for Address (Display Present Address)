@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+// Creating a union with 6 strings
+union Address {
+    char name[50];
+    char home_address[100];
+    char hostel_address[100];
+    char city[50];
+    char state[50];
+    char zip[10];
+};
+
+int main() {
+    union Address a;
+
+    // Storing present address (home address)
+    strcpy(a.home_address, "Sector 15, Noida, UP, 201301");
+
+    printf("Present Address: %s\n", a.home_address);
+
+    return 0;
+}
