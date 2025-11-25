@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+int main() {
+    int a = 10;
+    float b = 5.5;
+    char c = 'S';
+
+    int *p1 = &a;
+    float *p2 = &b;
+    char *p3 = &c;
+
+    printf("Value of a = %d, Address = %p, Pointer p1 = %p, *p1 = %d\n", a, &a, p1, *p1);
+    printf("Value of b = %.2f, Address = %p, Pointer p2 = %p, *p2 = %.2f\n", b, &b, p2, *p2);
+    printf("Value of c = %c, Address = %p, Pointer p3 = %p, *p3 = %c\n", c, &c, p3, *p3);
+
+    return 0;
+}
