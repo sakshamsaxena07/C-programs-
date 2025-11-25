@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int size, newSize;
+    char *str;
+
+    printf("Enter initial string size: ");
+    scanf("%d", &size);
+
+    str = (char*) malloc(size * sizeof(char));
+
+    printf("Enter string: ");
+    getchar(); 
+    fgets(str, size, stdin);
+
+    printf("You entered: %s", str);
+
+    printf("Enter new size to expand: ");
+    scanf("%d", &newSize);
+
+    str = (char*) realloc(str, newSize * sizeof(char));
+
+    printf("Enter additional characters: ");
+    getchar();
+    fgets(str + (size - 1), newSize - (size - 1), stdin);
+
+    printf("Final string: %s", str);
+
+    free(str);
+
+    return 0;
+}
