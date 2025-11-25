@@ -1,0 +1,38 @@
+#include <stdio.h>
+
+struct date {
+    int day;
+    int month;
+    int year;
+};
+
+struct employee {
+    char name[50];
+    int id;
+    float salary;
+    struct date birthday;   // nested structure
+};
+
+int main() {
+    struct employee e;
+
+    printf("Enter Name: ");
+    scanf("%s", e.name);
+
+    printf("Enter ID: ");
+    scanf("%d", &e.id);
+
+    printf("Enter Salary: ");
+    scanf("%f", &e.salary);
+
+    printf("Enter Birthday (day month year): ");
+    scanf("%d %d %d", &e.birthday.day, &e.birthday.month, &e.birthday.year);
+
+    printf("\n--- EMPLOYEE DETAILS ---\n");
+    printf("Name     : %s\n", e.name);
+    printf("ID       : %d\n", e.id);
+    printf("Salary   : %.2f\n", e.salary);
+    printf("Birthday : %d-%d-%d\n", e.birthday.day, e.birthday.month, e.birthday.year);
+
+    return 0;
+}
