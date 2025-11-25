@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+void modify(int *x, float *y) {
+    *x = *x + 10;
+    *y = *y * 2;
+}
+
+int main() {
+    int a = 5;
+    float b = 3.5;
+
+    modify(&a, &b);
+
+    printf("Modified a = %d\n", a);
+    printf("Modified b = %.2f\n", b);
+
+    return 0;
+}
