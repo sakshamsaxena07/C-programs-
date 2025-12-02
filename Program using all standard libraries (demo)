@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <stdarg.h>
+#include <time.h>
+#include <math.h>
+#include <string.h>
+
+void printAll(int count, ...) {
+    va_list list;
+    va_start(list, count);
+    for (int i = 0; i < count; i++) {
+        printf("%d ", va_arg(list, int));
+    }
+    va_end(list);
+    printf("\n");
+}
+
+int main() {
+    char ch = 'a';
+    printf("Uppercase of %c = %c\n", ch, toupper(ch));
+
+    int *p = malloc(sizeof(int));
+    assert(p != NULL);  
+    *p = 50;
+    printf("Dynamic value = %d\n", *p);
+
+    printAll(3, 10, 20, 30);
+
+    time_t now = time(NULL);
+    printf("Current time: %s", ctime(&now));
+
+    printf("Square root of 25 = %.2f\n", sqrt(25));
+
+    char str1[20] = "Hello";
+    char str2[20] = "World";
+    strcat(str1, str2);
+    printf("Concatenated string: %s\n", str1);
+
+    free(p);
+    
+    return 0;
+}
