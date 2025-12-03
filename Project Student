@@ -1,0 +1,228 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 100
+
+struct Student {
+    long long sap_id;
+    int roll_no;
+    char name[50];
+    char phone[20];
+    char email[50];
+    int year;
+    int semester;
+    float sgpa[8];
+    float cgpa;
+};
+
+struct Student s[MAX];
+int count = 0;
+
+// Function prototypes
+void addStudent();
+void searchStudent();
+void calculateCGPA();
+void averageCGPAbyYear();
+void displayAll();
+void deleteStudent();
+void sortBySAP();
+void sortByName();
+
+// MAIN MENU
+int main() {
+    int choice;
+
+    while (1) {
+        printf("\n===== STUDENT RECORD & RESULT MANAGEMENT SYSTEM =====\n");
+        printf("1. Add Student\n");
+        printf("2. Search Student\n");
+        printf("3. Calculate CGPA of each student\n");
+        printf("4. Calculate Average CGPA of each Year\n");
+        printf("5. Display All Students\n");
+        printf("6. Delete Student\n");
+        printf("7. Display Sorted by SAP ID\n");
+        printf("8. Display Sorted by Name\n");
+        printf("9. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1: addStudent(); break;
+            case 2: searchStudent(); break;
+            case 3: calculateCGPA(); break;
+            case 4: averageCGPAbyYear(); break;
+            case 5: displayAll(); break;
+            case 6: deleteStudent(); break;
+            case 7: sortBySAP(); displayAll(); break;
+            case 8: sortByName(); displayAll(); break;
+            case 9: return 0;
+            default: printf("Invalid Choice!\n");
+        }
+    }
+}
+
+// ADD STUDENT
+void addStudent() {
+    if (count >= MAX) {
+        printf("Limit reached!\n");
+        return;
+    }
+
+    printf("\nEnter SAP ID: ");
+    scanf("%lld", &s[count].sap_id);
+
+    printf("Enter Roll No: ");
+    scanf("%d", &s[count].roll_no);
+
+    printf("Enter Name: ");
+    getchar();
+    fgets(s[count].name, 50, stdin);
+    s[count].name[strcspn(s[count].name, "\n")] = 0;
+
+    printf("Enter Phone No: ");
+    scanf("%s", s[count].phone);
+
+    printf("Enter Email ID: ");
+    scanf("%s", s[count].email);
+
+    printf("Enter Year (1-4): ");
+    scanf("%d", &s[count].year);
+
+    printf("Enter Semester: ");
+    scanf("%d", &s[count].semester);
+
+    printf("Enter SGPA for 8 semesters:\n");
+    for (int i = 0; i < 8; i++) {
+        printf("SGPA Sem %d: ", i + 1);
+        scanf("%f", &s[count].sgpa[i]);
+    }
+
+    count++;
+    printf("Student added successfully!\n");
+}
+
+// SEARCH STUDENT
+void searchStudent() {
+    long long id;
+    printf("Enter SAP ID to search: ");
+    scanf("%lld", &id);
+
+    for (int i = 0; i < count; i++) {
+        if (s[i].sap_id == id) {
+            printf("\n===== STUDENT FOUND =====\n");
+            printf("SAP ID      : %lld\n", s[i].sap_id);
+            printf("Name        : %s\n", s[i].name);
+            printf("Roll No     : %d\n", s[i].roll_no);
+            printf("Phone       : %s\n", s[i].phone);
+            printf("Email       : %s\n", s[i].email);
+            printf("Year        : %d\n", s[i].year);
+            printf("Semester    : %d\n", s[i].semester);
+            printf("CGPA        : %.2f\n", s[i].cgpa);
+            return;
+        }
+    }
+
+    printf("Student not found!\n");
+}
+
+// CALCULATE CGPA
+void calculateCGPA() {
+    for (int i = 0; i < count; i++) {
+        float sum = 0;
+        for (int j = 0; j < 8; j++) {
+            sum += s[i].sgpa[j];
+        }
+        s[i].cgpa = sum / 8.0;
+    }
+    printf("CGPA calculated successfully!\n");
+}
+
+// AVERAGE CGPA OF EACH YEAR
+void averageCGPAbyYear() {
+    for (int yr = 1; yr <= 4; yr++) {
+        float sum = 0;
+        int c = 0;
+
+        for (int i = 0; i < count; i++) {
+            if (s[i].year == yr) {
+                sum += s[i].cgpa;
+                c++;
+            }
+        }
+
+        if (c > 0)
+            printf("Average CGPA of Year %d = %.2f\n", yr, sum / c);
+        else
+            printf("No students in Year %d\n", yr);
+    }
+}
+
+// DISPLAY ALL STUDENTS
+void displayAll() {
+    if (count == 0) {
+        printf("No records available!\n");
+        return;
+    }
+
+    printf("\n===== ALL STUDENT RECORDS =====\n");
+    for (int i = 0; i < count; i++) {
+        printf("\nSAP ID: %lld\n", s[i].sap_id);
+        printf("Name: %s\n", s[i].name);
+        printf("Roll No: %d\n", s[i].roll_no);
+        printf("Phone: %s\n", s[i].phone);
+        printf("Email: %s\n", s[i].email);
+        printf("Year: %d\n", s[i].year);
+        printf("Semester: %d\n", s[i].semester);
+        printf("CGPA: %.2f\n", s[i].cgpa);
+    }
+}
+
+// DELETE STUDENT BY SAP ID
+void deleteStudent() {
+    long long id;
+    printf("Enter SAP ID to delete: ");
+    scanf("%lld", &id);
+
+    for (int i = 0; i < count; i++) {
+        if (s[i].sap_id == id) {
+            for (int j = i; j < count - 1; j++) {
+                s[j] = s[j + 1];
+            }
+            count--;
+            printf("Record deleted successfully!\n");
+            return;
+        }
+    }
+
+    printf("Student not found!\n");
+}
+
+// SORT BY SAP ID
+void sortBySAP() {
+    struct Student temp;
+    for (int i = 0; i < count - 1; i++) {
+        for (int j = i + 1; j < count; j++) {
+            if (s[i].sap_id > s[j].sap_id) {
+                temp = s[i];
+                s[i] = s[j];
+                s[j] = temp;
+            }
+        }
+    }
+    printf("Sorted by SAP ID!\n");
+}
+
+// SORT BY NAME
+void sortByName() {
+    struct Student temp;
+    for (int i = 0; i < count - 1; i++) {
+        for (int j = i + 1; j < count; j++) {
+            if (strcmp(s[i].name, s[j].name) > 0) {
+                temp = s[i];
+                s[i] = s[j];
+                s[j] = temp;
+            }
+        }
+    }
+    printf("Sorted by Name!\n");
+}
